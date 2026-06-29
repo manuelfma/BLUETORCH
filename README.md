@@ -1,4 +1,3 @@
-[README.md](https://github.com/user-attachments/files/29461595/README.md)
 # Blue Torch.me
 
 Enterprise deal intelligence for venture capital and private equity teams.
