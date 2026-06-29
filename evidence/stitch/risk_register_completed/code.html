@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Risk Register | Alpha Private Equity</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500&amp;family=Source+Serif+4:ital,opsz,wght@0,8..60,400..700;1,8..60,400..700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                "surface-container-low": "#f6f3f3",
+                "surface-container": "#f0eded",
+                "on-background": "#1c1b1c",
+                "on-tertiary-fixed": "#221a13",
+                "surface-container-lowest": "#ffffff",
+                "porcelain": "#EBE7DC",
+                "inverse-primary": "#c3c6cd",
+                "secondary-fixed-dim": "#9bcfdc",
+                "on-secondary-container": "#376c77",
+                "on-secondary": "#ffffff",
+                "on-surface-variant": "#45474b",
+                "on-secondary-fixed": "#001f25",
+                "on-error": "#ffffff",
+                "primary": "#000000",
+                "tertiary-fixed": "#f0dfd4",
+                "secondary": "#316671",
+                "on-primary-container": "#80848a",
+                "paper": "#F7F5EF",
+                "rule": "#D3CEC2",
+                "on-secondary-fixed-variant": "#144e58",
+                "outline": "#75777b",
+                "primary-fixed-dim": "#c3c6cd",
+                "primary-fixed": "#e0e2ea",
+                "on-tertiary-container": "#8f8177",
+                "background": "#fcf8f8",
+                "surface-dim": "#dcd9d9",
+                "secondary-fixed": "#b6ebf8",
+                "tertiary-container": "#221a13",
+                "on-surface": "#1c1b1c",
+                "tertiary-fixed-dim": "#d3c4b8",
+                "success": "#3F6B4F",
+                "slate": "#66707A",
+                "info": "#486A7A",
+                "error": "#9E3B35",
+                "tertiary": "#000000",
+                "surface-variant": "#e5e2e2",
+                "surface-bright": "#fcf8f8",
+                "surface-container-high": "#ebe7e7",
+                "surface": "#fcf8f8",
+                "on-tertiary": "#ffffff",
+                "primary-container": "#181c21",
+                "error-container": "#ffdad6",
+                "on-primary-fixed": "#181c21",
+                "on-primary": "#ffffff",
+                "warn": "#A76522",
+                "secondary-container": "#b6ebf8",
+                "on-primary-fixed-variant": "#43474d",
+                "inverse-on-surface": "#f3f0f0",
+                "inverse-surface": "#313031",
+                "outline-variant": "#c5c6cb",
+                "on-tertiary-fixed-variant": "#4f453c",
+                "surface-container-highest": "#e5e2e2",
+                "accent-brass": "#B8872E",
+                "surface-tint": "#5b5f65",
+                "on-error-container": "#93000a"
+            },
+            "borderRadius": {
+                "DEFAULT": "0.125rem",
+                "lg": "0.25rem",
+                "xl": "0.5rem",
+                "full": "0.75rem"
+            },
+            "fontFamily": {
+                "title-sm": ["\"Source Serif 4\""],
+                "body-md": ["IBM Plex Sans"],
+                "data-mono": ["IBM Plex Mono"],
+                "headline-md": ["\"Source Serif 4\""],
+                "label-sm": ["IBM Plex Sans"],
+                "display-lg": ["\"Source Serif 4\""],
+                "body-md-bold": ["IBM Plex Sans"]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .custom-scrollbar::-webkit-scrollbar { width: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #D3CEC2; border-radius: 2px; }
+        .risk-stripe-critical { border-left: 4px solid #9E3B35; }
+        .risk-stripe-high { border-left: 4px solid #A76522; }
+        .risk-stripe-moderate { border-left: 4px solid #486A7A; }
+        .risk-stripe-low { border-left: 4px solid #3F6B4F; }
+    </style>
+</head>
+<body class="bg-paper text-on-surface font-body-md overflow-hidden">
+<!-- Shell Layout -->
+<div class="flex h-screen w-full">
+<!-- Side Navigation -->
+<aside class="fixed left-0 top-0 h-full w-[240px] bg-primary flex flex-col border-r border-rule z-50">
+<div class="p-6">
+<div class="text-title-sm font-title-sm text-on-primary uppercase tracking-wider mb-1">Capital Analyst</div>
+<div class="text-label-sm font-label-sm text-on-primary-container">Venture Partners</div>
+</div>
+<div class="mt-4 flex-grow">
+<nav class="flex flex-col">
+<a class="flex items-center gap-3 px-4 py-3 text-on-primary-container hover:bg-on-primary-fixed-variant transition-colors duration-150" href="#">
+<span class="material-symbols-outlined">analytics</span>
+<span class="text-body-md">Pipeline</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-primary-container hover:bg-on-primary-fixed-variant transition-colors duration-150" href="#">
+<span class="material-symbols-outlined">business_center</span>
+<span class="text-body-md">Portfolio</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 bg-secondary text-on-secondary border-l-[3px] border-secondary-fixed-dim" href="#">
+<span class="material-symbols-outlined">fact_check</span>
+<span class="text-body-md">Due Diligence</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-primary-container hover:bg-on-primary-fixed-variant transition-colors duration-150" href="#">
+<span class="material-symbols-outlined">insights</span>
+<span class="text-body-md">Market Intel</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-primary-container hover:bg-on-primary-fixed-variant transition-colors duration-150" href="#">
+<span class="material-symbols-outlined">description</span>
+<span class="text-body-md">Documents</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-primary-container hover:bg-on-primary-fixed-variant transition-colors duration-150" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-body-md">Settings</span>
+</a>
+</nav>
+</div>
+<div class="p-4">
+<button class="w-full py-2 bg-on-secondary text-primary font-body-md-bold mb-4 active:scale-95 transition-transform">
+                    New Deal
+                </button>
+<div class="border-t border-on-primary-fixed-variant pt-4 flex flex-col gap-2">
+<a class="flex items-center gap-3 px-2 text-on-primary-container text-label-sm" href="#">
+<span class="material-symbols-outlined text-[18px]">help_outline</span>
+                        Support
+                    </a>
+<a class="flex items-center gap-3 px-2 text-on-primary-container text-label-sm" href="#">
+<span class="material-symbols-outlined text-[18px]">logout</span>
+                        Sign Out
+                    </a>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="ml-[240px] flex-grow flex flex-col w-[calc(100%-240px)]">
+<!-- Top Navigation -->
+<header class="flex justify-between items-center h-16 px-6 sticky top-0 z-40 bg-paper border-b border-rule">
+<div class="flex items-center gap-8">
+<div class="text-title-sm font-title-sm font-bold text-on-surface">Alpha Private Equity</div>
+<nav class="flex gap-6">
+<a class="text-on-surface-variant font-body-md hover:text-primary transition-colors" href="#">Deal Room</a>
+<a class="text-on-surface-variant font-body-md hover:text-primary transition-colors" href="#">Team Feed</a>
+<a class="text-primary font-body-md-bold border-b-2 border-primary pb-1" href="#">Risk Metrics</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<button class="px-3 py-1.5 border border-rule text-body-md hover:bg-porcelain transition-colors">Export Memo</button>
+<button class="px-4 py-1.5 bg-primary text-on-primary text-body-md font-body-md-bold active:opacity-80 transition-opacity">Approve Finding</button>
+<div class="flex items-center gap-2 ml-4">
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:text-primary transition-colors">notifications</span>
+</div>
+</div>
+</header>
+<!-- Content Scroller -->
+<div class="flex-grow overflow-auto custom-scrollbar bg-background p-8">
+<div class="max-w-[1440px] mx-auto">
+<div class="flex justify-between items-end mb-8">
+<div>
+<h1 class="text-display-lg font-display-lg text-primary mb-2">Project Phoenix: Risk Register</h1>
+<p class="text-on-surface-variant max-w-2xl">Consolidated findings from Stage 2 Technical and Financial Due Diligence. Updated as of Oct 24, 2023.</p>
+</div>
+<div class="flex gap-3">
+<div class="flex flex-col items-end">
+<span class="text-label-sm uppercase tracking-widest text-on-surface-variant">Aggregate Score</span>
+<span class="text-headline-md font-headline-md text-warn">68/100 (MODERATE)</span>
+</div>
+</div>
+</div>
+<!-- Risk Table -->
+<div class="bg-surface border border-rule shadow-sm overflow-hidden">
+<table class="w-full text-left border-collapse">
+<thead class="bg-surface-container border-b border-rule">
+<tr>
+<th class="px-4 py-3 text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider w-1/3">Risk Description</th>
+<th class="px-4 py-3 text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider">Severity</th>
+<th class="px-4 py-3 text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider">Confidence</th>
+<th class="px-4 py-3 text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider">Citation</th>
+<th class="px-4 py-3 text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider">Status</th>
+<th class="px-4 py-3 text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider">Owner</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-rule/50">
+<!-- Category: Financial -->
+<tr class="bg-surface-container-low">
+<td class="px-4 py-2 text-body-md-bold text-primary bg-surface-container-high/50" colspan="6">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">payments</span>
+                                    Financial Risks
+                                </div>
+</td>
+</tr>
+<tr class="risk-stripe-critical hover:bg-surface-container-lowest transition-colors">
+<td class="px-4 py-4">
+<div class="font-body-md-bold">Customer Churn Discrepancy</div>
+<div class="text-label-sm text-on-surface-variant mt-0.5">Reported 4% vs Actual 12.5% in cohort analysis.</div>
+</td>
+<td class="px-4 py-4">
+<span class="inline-flex items-center px-2 py-0.5 bg-error-container text-error text-label-sm font-label-sm uppercase tracking-tighter rounded">Critical</span>
+</td>
+<td class="px-4 py-4 font-data-mono text-primary">94%</td>
+<td class="px-4 py-4 font-data-mono text-on-surface-variant">[REF: FIN-04]</td>
+<td class="px-4 py-4 text-body-md">In Investigation</td>
+<td class="px-4 py-4">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-primary-fixed flex items-center justify-center text-[10px] font-bold">MK</div>
+<span class="text-body-md">M. Kaplan</span>
+</div>
+</td>
+</tr>
+<tr class="risk-stripe-moderate hover:bg-surface-container-lowest transition-colors">
+<td class="px-4 py-4">
+<div class="font-body-md-bold">Tax Liability - R&amp;D Credits</div>
+<div class="text-label-sm text-on-surface-variant mt-0.5">Potential recapture of credits from 2021 fiscal year.</div>
+</td>
+<td class="px-4 py-4">
+<span class="inline-flex items-center px-2 py-0.5 bg-secondary-container text-on-secondary-container text-label-sm font-label-sm uppercase tracking-tighter rounded">Moderate</span>
+</td>
+<td class="px-4 py-4 font-data-mono text-primary">65%</td>
+<td class="px-4 py-4 font-data-mono text-on-surface-variant">[REF: TAX-12]</td>
+<td class="px-4 py-4 text-body-md text-success">Mitigated (Escrow)</td>
+<td class="px-4 py-4">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-primary-fixed flex items-center justify-center text-[10px] font-bold">RS</div>
+<span class="text-body-md">R. Singh</span>
+</div>
+</td>
+</tr>
+<!-- Category: Market -->
+<tr class="bg-surface-container-low">
+<td class="px-4 py-2 text-body-md-bold text-primary bg-surface-container-high/50 border-t border-rule" colspan="6">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">language</span>
+                                    Market Risks
+                                </div>
+</td>
+</tr>
+<tr class="risk-stripe-high hover:bg-surface-container-lowest transition-colors">
+<td class="px-4 py-4">
+<div class="font-body-md-bold">Regulatory Shift APAC</div>
+<div class="text-label-sm text-on-surface-variant mt-0.5">New privacy framework in SE Asia impacting 15% of revenue.</div>
+</td>
+<td class="px-4 py-4">
+<span class="inline-flex items-center px-2 py-0.5 bg-warn/10 text-warn text-label-sm font-label-sm uppercase tracking-tighter rounded">High</span>
+</td>
+<td class="px-4 py-4 font-data-mono text-primary">82%</td>
+<td class="px-4 py-4 font-data-mono text-on-surface-variant">[REF: LEG-09]</td>
+<td class="px-4 py-4 text-body-md">Reviewing Legal Opinion</td>
+<td class="px-4 py-4">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-primary-fixed flex items-center justify-center text-[10px] font-bold">JD</div>
+<span class="text-body-md">J. Doe</span>
+</div>
+</td>
+</tr>
+<tr class="risk-stripe-low hover:bg-surface-container-lowest transition-colors">
+<td class="px-4 py-4">
+<div class="font-body-md-bold">Competitor Series B Extension</div>
+<div class="text-label-sm text-on-surface-variant mt-0.5">Rival 'Z-Corp' raised additional $40M for marketing push.</div>
+</td>
+<td class="px-4 py-4">
+<span class="inline-flex items-center px-2 py-0.5 bg-surface-container-highest text-on-surface-variant text-label-sm font-label-sm uppercase tracking-tighter rounded">Low</span>
+</td>
+<td class="px-4 py-4 font-data-mono text-primary">45%</td>
+<td class="px-4 py-4 font-data-mono text-on-surface-variant">[REF: MKT-22]</td>
+<td class="px-4 py-4 text-body-md">Monitoring</td>
+<td class="px-4 py-4">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-primary-fixed flex items-center justify-center text-[10px] font-bold">AL</div>
+<span class="text-body-md">A. Lee</span>
+</div>
+</td>
+</tr>
+<!-- Category: Technology -->
+<tr class="bg-surface-container-low">
+<td class="px-4 py-2 text-body-md-bold text-primary bg-surface-container-high/50 border-t border-rule" colspan="6">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">terminal</span>
+                                    Technology Risks
+                                </div>
+</td>
+</tr>
+<tr class="risk-stripe-high hover:bg-surface-container-lowest transition-colors">
+<td class="px-4 py-4">
+<div class="font-body-md-bold">Technical Debt - Monolith Core</div>
+<div class="text-label-sm text-on-surface-variant mt-0.5">Legacy backend prevents rapid feature deployment cycles.</div>
+</td>
+<td class="px-4 py-4">
+<span class="inline-flex items-center px-2 py-0.5 bg-warn/10 text-warn text-label-sm font-label-sm uppercase tracking-tighter rounded">High</span>
+</td>
+<td class="px-4 py-4 font-data-mono text-primary">88%</td>
+<td class="px-4 py-4 font-data-mono text-on-surface-variant">[REF: TECH-01]</td>
+<td class="px-4 py-4 text-body-md">Post-Acq Roadmap Item</td>
+<td class="px-4 py-4">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-primary-fixed flex items-center justify-center text-[10px] font-bold">TB</div>
+<span class="text-body-md">T. Baker</span>
+</div>
+</td>
+</tr>
+<!-- Category: Founder -->
+<tr class="bg-surface-container-low">
+<td class="px-4 py-2 text-body-md-bold text-primary bg-surface-container-high/50 border-t border-rule" colspan="6">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">groups</span>
+                                    Founder &amp; Governance
+                                </div>
+</td>
+</tr>
+<tr class="risk-stripe-moderate hover:bg-surface-container-lowest transition-colors">
+<td class="px-4 py-4">
+<div class="font-body-md-bold">Key Person Dependency - CTO</div>
+<div class="text-label-sm text-on-surface-variant mt-0.5">Founder-CTO holds all architectural knowledge.</div>
+</td>
+<td class="px-4 py-4">
+<span class="inline-flex items-center px-2 py-0.5 bg-secondary-container text-on-secondary-container text-label-sm font-label-sm uppercase tracking-tighter rounded">Moderate</span>
+</td>
+<td class="px-4 py-4 font-data-mono text-primary">70%</td>
+<td class="px-4 py-4 font-data-mono text-on-surface-variant">[REF: GOV-04]</td>
+<td class="px-4 py-4 text-body-md">Vesting Schedule Adjustment</td>
+<td class="px-4 py-4">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-primary-fixed flex items-center justify-center text-[10px] font-bold">MK</div>
+<span class="text-body-md">M. Kaplan</span>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="px-4 py-3 bg-surface-container-low border-t border-rule flex justify-between items-center">
+<span class="text-label-sm text-on-surface-variant italic">Showing 6 risk items identified during DD Phase II</span>
+<button class="text-label-sm font-label-sm text-secondary hover:underline">Add Risk Entry +</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Alpha Private Equity | Investment Memo Builder</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;family=IBM+Plex+Mono:wght@500&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@100..900&amp;family=Source+Serif+4:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-low": "#f6f3f3",
+                        "surface-container": "#f0eded",
+                        "on-background": "#1c1b1c",
+                        "on-tertiary-fixed": "#221a13",
+                        "surface-container-lowest": "#ffffff",
+                        "porcelain": "#EBE7DC",
+                        "inverse-primary": "#c3c6cd",
+                        "secondary-fixed-dim": "#9bcfdc",
+                        "on-secondary-container": "#376c77",
+                        "on-secondary": "#ffffff",
+                        "on-surface-variant": "#45474b",
+                        "on-secondary-fixed": "#001f25",
+                        "on-error": "#ffffff",
+                        "primary": "#000000",
+                        "tertiary-fixed": "#f0dfd4",
+                        "secondary": "#316671",
+                        "on-primary-container": "#80848a",
+                        "paper": "#F7F5EF",
+                        "rule": "#D3CEC2",
+                        "on-secondary-fixed-variant": "#144e58",
+                        "outline": "#75777b",
+                        "primary-fixed-dim": "#c3c6cd",
+                        "primary-fixed": "#e0e2ea",
+                        "on-tertiary-container": "#8f8177",
+                        "background": "#fcf8f8",
+                        "surface-dim": "#dcd9d9",
+                        "secondary-fixed": "#b6ebf8",
+                        "tertiary-container": "#221a13",
+                        "on-surface": "#1c1b1c",
+                        "tertiary-fixed-dim": "#d3c4b8",
+                        "success": "#3F6B4F",
+                        "slate": "#66707A",
+                        "info": "#486A7A",
+                        "error": "#9E3B35",
+                        "tertiary": "#000000",
+                        "surface-variant": "#e5e2e2",
+                        "surface-bright": "#fcf8f8",
+                        "surface-container-high": "#ebe7e7",
+                        "surface": "#fcf8f8",
+                        "on-tertiary": "#ffffff",
+                        "primary-container": "#181c21",
+                        "error-container": "#ffdad6",
+                        "on-primary-fixed": "#181c21",
+                        "on-primary": "#ffffff",
+                        "warn": "#A76522",
+                        "secondary-container": "#b6ebf8",
+                        "on-primary-fixed-variant": "#43474d",
+                        "inverse-on-surface": "#f3f0f0",
+                        "inverse-surface": "#313031",
+                        "outline-variant": "#c5c6cb",
+                        "on-tertiary-fixed-variant": "#4f453c",
+                        "surface-container-highest": "#e5e2e2",
+                        "accent-brass": "#B8872E",
+                        "surface-tint": "#5b5f65",
+                        "on-error-container": "#93000a"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "fontFamily": {
+                        "title-sm": ["Source Serif 4"],
+                        "body-md": ["IBM Plex Sans"],
+                        "data-mono": ["IBM Plex Mono"],
+                        "headline-md": ["Source Serif 4"],
+                        "label-sm": ["IBM Plex Sans"],
+                        "display-lg": ["Source Serif 4"],
+                        "body-md-bold": ["IBM Plex Sans"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+            font-size: 20px;
+        }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        .editor-container blockquote {
+            border-left: 3px solid theme('colors.accent-brass');
+            padding-left: 1rem;
+            font-style: italic;
+            color: theme('colors.on-surface-variant');
+        }
+
+        .citation-chip {
+            display: inline-flex;
+            align-items: center;
+            background: theme('colors.porcelain');
+            border: 1px solid theme('colors.rule');
+            padding: 0 6px;
+            border-radius: 2px;
+            font-family: theme('fontFamily.data-mono');
+            font-size: 11px;
+            color: theme('colors.accent-brass');
+            cursor: pointer;
+            margin: 0 4px;
+            transition: all 0.2s;
+            font-weight: 600;
+        }
+        .citation-chip:hover {
+            background: theme('colors.accent-brass');
+            color: white;
+            border-color: theme('colors.accent-brass');
+        }
+
+        .drop-zone-active {
+            border: 2px dashed theme('colors.accent-brass') !important;
+            background: rgba(184, 135, 46, 0.05);
+        }
+
+        .memo-canvas {
+            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05);
+        }
+
+        .section-number {
+            font-family: theme('fontFamily.data-mono');
+            color: theme('colors.accent-brass');
+            font-size: 14px;
+            letter-spacing: 0.1em;
+        }
+    </style>
+</head>
+<body class="bg-surface-container-low font-body-md text-on-surface overflow-hidden">
+<!-- Global Layout Shell -->
+<div class="flex h-screen w-full">
+<!-- SideNavBar (Shared Component) -->
+<aside class="fixed left-0 top-0 h-full w-[240px] flex flex-col bg-primary border-r border-rule z-50">
+<div class="p-6">
+<div class="text-title-sm font-title-sm text-on-primary uppercase tracking-wider mb-1">Capital Analyst</div>
+<div class="text-label-sm font-label-sm text-on-primary-container">Venture Partners</div>
+</div>
+<nav class="flex-1 px-2 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 text-on-primary-container hover:bg-on-primary-fixed-variant transition-colors duration-150 rounded" href="#">
+<span class="material-symbols-outlined">analytics</span>
+<span class="text-body-md">Pipeline</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-primary-container hover:bg-on-primary-fixed-variant transition-colors duration-150 rounded" href="#">
+<span class="material-symbols-outlined">business_center</span>
+<span class="text-body-md">Portfolio</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-primary-container hover:bg-on-primary-fixed-variant transition-colors duration-150 rounded" href="#">
+<span class="material-symbols-outlined">fact_check</span>
+<span class="text-body-md">Due Diligence</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-primary-container hover:bg-on-primary-fixed-variant transition-colors duration-150 rounded" href="#">
+<span class="material-symbols-outlined">insights</span>
+<span class="text-body-md">Market Intel</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 bg-secondary text-on-secondary border-l-[3px] border-secondary-fixed-dim" href="#">
+<span class="material-symbols-outlined">description</span>
+<span class="text-body-md">Documents</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-primary-container hover:bg-on-primary-fixed-variant transition-colors duration-150 rounded" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-body-md">Settings</span>
+</a>
+</nav>
+<div class="mt-auto p-4 border-t border-on-primary-fixed-variant">
+<div class="flex items-center gap-3 mb-6 px-2">
+<div class="w-8 h-8 rounded bg-on-primary-fixed-variant flex items-center justify-center text-on-primary text-xs font-bold">JD</div>
+<div class="flex flex-col">
+<span class="text-label-sm font-body-md-bold text-on-primary">Jane Doe</span>
+<span class="text-[10px] text-on-primary-container">Lead Analyst</span>
+</div>
+</div>
+<a class="flex items-center gap-3 px-4 py-2 text-on-primary-container hover:text-on-primary transition-colors text-label-sm" href="#">
+<span class="material-symbols-outlined">help_outline</span> Support
+            </a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-primary-container hover:text-on-primary transition-colors text-label-sm" href="#">
+<span class="material-symbols-outlined">logout</span> Sign Out
+            </a>
+</div>
+</aside>
+<!-- Main Content Area -->
+<div class="flex flex-col flex-1 ml-[240px]">
+<!-- TopNavBar (Shared Component) -->
+<header class="flex justify-between items-center h-16 px-6 sticky top-0 z-40 bg-paper border-b border-rule w-full">
+<div class="flex items-center gap-8">
+<span class="text-title-sm font-title-sm font-bold text-on-surface">Alpha Private Equity</span>
+<nav class="hidden md:flex gap-6">
+<a class="text-on-surface-variant font-body-md hover:text-primary transition-colors" href="#">Deal Room</a>
+<a class="text-primary font-body-md-bold border-b-2 border-primary pb-1" href="#">Investment Memo</a>
+<a class="text-on-surface-variant font-body-md hover:text-primary transition-colors" href="#">Risk Metrics</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<button class="px-4 py-2 border border-rule bg-surface-container-lowest text-on-surface-variant text-label-sm font-body-md-bold hover:bg-surface-container transition-colors active:opacity-80">
+                    Export Memo
+                </button>
+<button class="px-4 py-2 bg-primary text-on-primary text-label-sm font-body-md-bold hover:opacity-90 transition-opacity active:opacity-80">
+                    Approve Finding
+                </button>
+<div class="h-6 w-px bg-rule mx-2"></div>
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:text-primary">notifications</span>
+</div>
+</header>
+<!-- Builder Content -->
+<main class="flex-1 flex overflow-hidden">
+<!-- Central Memo Canvas -->
+<div class="flex-1 overflow-y-auto p-12 bg-surface-container-low flex justify-center">
+<div class="memo-canvas w-full max-w-4xl bg-paper min-h-[1200px] border border-rule p-16 flex flex-col gap-12 relative">
+<!-- Document Header -->
+<div class="border-b-2 border-primary pb-8">
+<div class="flex justify-between items-end mb-4">
+<span class="text-label-sm font-data-mono text-accent-brass uppercase tracking-widest">Confidential | IC Review v4.2</span>
+<span class="text-label-sm text-on-surface-variant">Last saved: 14:32 ET</span>
+</div>
+<h1 class="font-display-lg text-4xl mb-2">Investment Memo: Project Zephyr</h1>
+<p class="text-on-surface-variant font-body-md italic">Strategic Acquisition Opportunity in Distributed Cloud Infrastructure</p>
+</div>
+<!-- 1.0 Investment Thesis -->
+<section class="space-y-6">
+<div class="flex items-baseline gap-4">
+<span class="section-number">1.0</span>
+<h2 class="font-headline-md text-2xl border-b border-rule flex-1 pb-1">Investment Thesis</h2>
+</div>
+<div class="space-y-4 text-on-surface leading-relaxed text-body-md">
+<p>
+                                Project Zephyr represents an <span class="font-body-md-bold text-primary italic">asymmetric opportunity</span> to consolidate the fragmented edge computing market. The target's proprietary virtualization layer provides a 4x efficiency gain over legacy competitors, positioning them as the inevitable infrastructure partner for Tier 1 hyperscalers.
+                            </p>
+<ul class="list-none space-y-3 pl-0">
+<li class="flex gap-4">
+<span class="text-accent-brass">●</span>
+<span><strong>First-Mover Advantage:</strong> Dominant patent portfolio in ARM-based micro-kernels. <span class="citation-chip">IP_AUDIT_24</span></span>
+</li>
+<li class="flex gap-4">
+<span class="text-accent-brass">●</span>
+<span><strong>Capital Efficiency:</strong> Negative working capital cycle due to upfront multi-year enterprise contracts. <span class="citation-chip">FIN_DUE_08</span></span>
+</li>
+<li class="flex gap-4">
+<span class="text-accent-brass">●</span>
+<span><strong>Defensive Moat:</strong> Deep integration with government security protocols.</span>
+</li>
+</ul>
+</div>
+</section>
+<!-- 2.0 Diligence Gaps -->
+<section class="space-y-6">
+<div class="flex items-baseline gap-4">
+<span class="section-number">2.0</span>
+<h2 class="font-headline-md text-2xl border-b border-rule flex-1 pb-1">Diligence Gaps &amp; Red Flags</h2>
+</div>
+<div class="grid grid-cols-2 gap-6">
+<!-- Gap Card 1 -->
+<div class="border border-error/30 bg-error-container/5 p-4 rounded-sm flex flex-col gap-3">
+<div class="flex justify-between items-start">
+<span class="text-label-sm font-body-md-bold text-error uppercase flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">warning</span> High Risk
+                                    </span>
+<span class="text-[10px] font-data-mono text-on-surface-variant">ID: GAP-022</span>
+</div>
+<h3 class="font-body-md-bold text-on-surface">Supply Chain Transparency</h3>
+<p class="text-label-sm text-on-surface-variant">Unresolved dependency on single-source fabrication in SE Asia. Potential geopolitical exposure exceeds threshold.</p>
+<div class="mt-auto pt-3 border-t border-rule flex justify-between items-center">
+<span class="text-[10px] text-on-surface-variant italic">Owner: Ops Team</span>
+<span class="citation-chip">LOG_RISK</span>
+</div>
+</div>
+<!-- Gap Card 2 -->
+<div class="border border-warn/30 bg-warn/5 p-4 rounded-sm flex flex-col gap-3">
+<div class="flex justify-between items-start">
+<span class="text-label-sm font-body-md-bold text-warn uppercase flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">hourglass_empty</span> Pending
+                                    </span>
+<span class="text-[10px] font-data-mono text-on-surface-variant">ID: GAP-041</span>
+</div>
+<h3 class="font-body-md-bold text-on-surface">Customer Churn Analysis</h3>
+<p class="text-label-sm text-on-surface-variant">Discrepancy between gross logo retention (94%) and net revenue retention (102%) in the mid-market segment.</p>
+<div class="mt-auto pt-3 border-t border-rule flex justify-between items-center">
+<span class="text-[10px] text-on-surface-variant italic">Owner: Comms Team</span>
+<button class="text-label-sm font-body-md-bold text-accent-brass hover:underline">Re-examine</button>
+</div>
+</div>
+</div>
+</section>
+<!-- 3.0 Market Dynamics (Draft) -->
+<section class="space-y-6 opacity-60 grayscale-[0.5]">
+<div class="flex items-baseline gap-4">
+<span class="section-number">3.0</span>
+<h2 class="font-headline-md text-2xl border-b border-rule flex-1 pb-1">Market Dynamics</h2>
+</div>
+<div class="border-2 border-dashed border-rule p-8 rounded flex flex-col items-center justify-center text-on-surface-variant gap-2 bg-surface-container-lowest">
+<span class="material-symbols-outlined text-4xl">edit_note</span>
+<p class="font-body-md italic text-sm text-center max-w-xs">Section under drafting. Drag market evidence from the right panel to begin synthesis.</p>
+</div>
+</section>
+</div>
+</div>
+<!-- Right-hand Evidence Drawer -->
+<aside class="w-[320px] border-l border-rule bg-white flex flex-col shadow-xl z-30">
+<div class="p-4 border-b border-rule bg-surface-container flex justify-between items-center">
+<h3 class="text-label-sm font-body-md-bold uppercase tracking-widest text-on-surface-variant">Evidence Drawer</h3>
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer">filter_list</span>
+</div>
+<div class="flex-1 overflow-y-auto p-4 space-y-4">
+<div class="relative">
+<input class="w-full bg-surface-container-low border-rule rounded px-8 py-2 text-label-sm focus:border-accent-brass focus:ring-0" placeholder="Search facts..." type="text"/>
+<span class="material-symbols-outlined absolute left-2 top-2 text-on-surface-variant text-sm">search</span>
+</div>
+<!-- Draggable Evidence Items -->
+<div class="space-y-3">
+<div class="p-3 border border-rule bg-paper hover:border-accent-brass cursor-grab group transition-all">
+<div class="flex justify-between items-center mb-2">
+<span class="px-1.5 py-0.5 bg-success/10 text-success text-[10px] font-bold uppercase rounded">Approved</span>
+<span class="font-data-mono text-[9px] text-on-surface-variant">#FACT-282</span>
+</div>
+<p class="text-xs text-on-surface font-body-md leading-tight mb-2">TAM for Edge Virtualization expected to grow 24% CAGR through 2028.</p>
+<div class="flex items-center gap-1">
+<span class="citation-chip">GARTNER_23</span>
+<span class="material-symbols-outlined text-on-surface-variant opacity-0 group-hover:opacity-100 text-sm ml-auto">drag_indicator</span>
+</div>
+</div>
+<div class="p-3 border border-rule bg-paper hover:border-accent-brass cursor-grab group transition-all">
+<div class="flex justify-between items-center mb-2">
+<span class="px-1.5 py-0.5 bg-success/10 text-success text-[10px] font-bold uppercase rounded">Approved</span>
+<span class="font-data-mono text-[9px] text-on-surface-variant">#ASSUMP-12</span>
+</div>
+<p class="text-xs text-on-surface font-body-md leading-tight mb-2">Exit multiple assumes 12x EBITDA based on recent Broadcom/VMware precedent.</p>
+<div class="flex items-center gap-1">
+<span class="citation-chip">M&amp;A_TEAM</span>
+<span class="material-symbols-outlined text-on-surface-variant opacity-0 group-hover:opacity-100 text-sm ml-auto">drag_indicator</span>
+</div>
+</div>
+<div class="p-3 border border-rule bg-paper hover:border-accent-brass cursor-grab group transition-all">
+<div class="flex justify-between items-center mb-2">
+<span class="px-1.5 py-0.5 bg-info/10 text-info text-[10px] font-bold uppercase rounded">Verified</span>
+<span class="font-data-mono text-[9px] text-on-surface-variant">#FACT-411</span>
+</div>
+<p class="text-xs text-on-surface font-body-md leading-tight mb-2">24 month pipeline covers 1.8x revenue target for FY25.</p>
+<div class="flex items-center gap-1">
+<span class="citation-chip">CRM_EXP_04</span>
+<span class="material-symbols-outlined text-on-surface-variant opacity-0 group-hover:opacity-100 text-sm ml-auto">drag_indicator</span>
+</div>
+</div>
+<div class="p-3 border border-rule bg-paper hover:border-accent-brass cursor-grab group transition-all">
+<div class="flex justify-between items-center mb-2">
+<span class="px-1.5 py-0.5 bg-success/10 text-success text-[10px] font-bold uppercase rounded">Approved</span>
+<span class="font-data-mono text-[9px] text-on-surface-variant">#FACT-009</span>
+</div>
+<p class="text-xs text-on-surface font-body-md leading-tight mb-2">Carbon footprint 30% lower than traditional rack servers.</p>
+<div class="flex items-center gap-1">
+<span class="citation-chip">ESG_REP</span>
+<span class="material-symbols-outlined text-on-surface-variant opacity-0 group-hover:opacity-100 text-sm ml-auto">drag_indicator</span>
+</div>
+</div>
+</div>
+</div>
+<div class="p-4 border-t border-rule bg-surface-container-low">
+<button class="w-full py-2 border-2 border-dashed border-rule text-on-surface-variant text-label-sm hover:border-accent-brass hover:text-accent-brass transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-sm">add_circle</span> Add New Evidence
+                    </button>
+</div>
+</aside>
+</main>
+</div>
+</div>
+</body></html>
