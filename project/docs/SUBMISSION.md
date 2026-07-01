@@ -12,6 +12,9 @@ Blue Torch.me is a premium B2B fintech platform for VC, growth equity, and priva
 - `ARCHITECTURE.md` — system architecture, data model, permissions, AI pipeline, and deployment plan
 - `AI_BEHAVIOUR.md` — first AI behavior specification and guardrails
 - `SPECIALIST_AGENT.md` — source-linked diligence risk analyst agent
+- `SECURITY_AUDIT_AGENT.md` — required post-push private-information audit agent
+- `SECURITY.md` — repository security policy and post-push audit process
+- `.github/workflows/security-audit.yml` — GitHub push check for tracked secrets and private environment files
 
 ## Prototype Evidence
 - Static landing page: `public/index.html`
@@ -28,6 +31,7 @@ Blue Torch.me is a premium B2B fintech platform for VC, growth equity, and priva
 - `evidence/red-team-log.md`
 - `evidence/mvp-experiment-plan.md`
 - `evidence/product-feature-review.md`
+- `evidence/security-audit-2026-07-01.md`
 
 ## External Items To Submit Separately
 - Screenshot of the static landing page open in browser

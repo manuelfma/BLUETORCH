@@ -30,6 +30,17 @@ When building features, emphasize human-centered decision-making. The system may
 - Treat uploaded materials as confidential by default.
 - Build for accuracy, repeatability, explainability, and investment committee workflows.
 
+## GitHub Push Security Rule
+Every time new code is pushed to GitHub, spawn a security audit subagent before treating the push as complete. The subagent must inspect the pushed diff and repository for private information, including API keys, tokens, `.env` files, credentials, private emails, confidential diligence materials, customer data, founder personal data, and unreleased financial information.
+
+The security audit subagent must return:
+- Findings with file paths and line references when possible.
+- A clear pass/fail decision.
+- Required remediation steps for any private information found.
+- Confirmation that no real secrets are present before the work is submitted.
+
+If private information is found, stop the submission workflow until the file is removed, the secret is rotated, and the repository history risk is acknowledged. Never paste secrets into chat, commit messages, screenshots, documentation, or issue descriptions.
+
 ## Restricted Behaviors
 Do not use exaggerated AI language, startup hype, robot imagery, vague productivity claims, or promises of superior investment performance. Avoid phrases like "revolutionary," "magic," "autonomous investor," "guaranteed alpha," or "instant perfect decisions."
 

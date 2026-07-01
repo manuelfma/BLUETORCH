@@ -1,0 +1,65 @@
+name: Security Audit
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  private-info-check:
+    name: Private information check
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Block tracked private environment files
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          tracked_env_files="$(git ls-files | grep -E '(^|/)\.env($|\.|/)' | grep -vE '(^|/)\.env\.example$' || true)"
+
+          if [ -n "$tracked_env_files" ]; then
+            echo "Private environment files are tracked:"
+            echo "$tracked_env_files"
+            echo "Remove these files from Git and rotate any exposed secrets."
+            exit 1
+          fi
+
+      - name: Scan for common secret patterns
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          matches="$(
+            git grep -nIE \
+              '(ghp_[A-Za-z0-9_]{20,}|github_pat_[A-Za-z0-9_]{20,}|sk-[A-Za-z0-9]{20,}|AIza[0-9A-Za-z_-]{20,}|SUPABASE_SERVICE_ROLE_KEY[[:space:]]*=[[:space:]]*[^[:space:]]+|BEGIN (RSA |OPENSSH |EC |)PRIVATE KEY|password[[:space:]]*=[[:space:]]*[^[:space:]]+|api[_-]?key[[:space:]]*=[[:space:]]*[^[:space:]]+|token[[:space:]]*=[[:space:]]*[^[:space:]]+)' \
+              -- \
+              ':!.env.example' \
+              ':!project/docs/.env.example' \
+              ':!SECURITY_AUDIT_AGENT.md' \
+              ':!project/docs/SECURITY_AUDIT_AGENT.md' \
+              ':!.github/workflows/security-audit.yml' \
+              ':!project/.github/workflows/security-audit.yml' \
+            || true
+          )"
+
+          if [ -n "$matches" ]; then
+            echo "Potential private information found:"
+            echo "$matches"
+            echo "Review these lines before submitting."
+            exit 1
+          fi
+
+      - name: Confirm audit instructions exist
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -f SECURITY_AUDIT_AGENT.md
+          grep -q "GitHub Push Security Rule" AGENTS.md

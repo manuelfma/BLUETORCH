@@ -75,6 +75,7 @@ Project documentation:
 - `ARCHITECTURE.md` — system architecture, data model, AI pipeline, and deployment plan
 - `AI_BEHAVIOUR.md` — AI behavior specification and evidence plan
 - `SPECIALIST_AGENT.md` — source-linked diligence risk analyst agent
+- `SECURITY_AUDIT_AGENT.md` — post-push private-information audit agent
 - `SUBMISSION.md` — submission package index and evidence checklist
 
 ## 7. How to Run / Preview Link
@@ -115,6 +116,7 @@ For Session 11/12 submission, include:
 - AI behavior spec: `AI_BEHAVIOUR.md`
 - Architecture spec: `ARCHITECTURE.md`
 - Specialist agent: `SPECIALIST_AGENT.md`
+- Security audit agent: `SECURITY_AUDIT_AGENT.md`
 - Submission index: `SUBMISSION.md`
 - Evidence screenshots:
   - `analysis_review/screen.png`
