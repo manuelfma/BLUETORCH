@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Blue Torch | Analyst Command Center</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500&amp;family=IBM+Plex+Sans:wght@400;600&amp;family=Source+Serif+4:ital,opsz,wght@0,8..60,600;0,8..60,700;1,8..60,600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind Config Injection -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                "surface-container-low": "#f6f3f3",
+                "surface-container": "#f0eded",
+                "on-background": "#1c1b1c",
+                "on-tertiary-fixed": "#221a13",
+                "surface-container-lowest": "#ffffff",
+                "porcelain": "#EBE7DC",
+                "inverse-primary": "#c3c6cd",
+                "secondary-fixed-dim": "#9bcfdc",
+                "on-secondary-container": "#376c77",
+                "on-secondary": "#ffffff",
+                "on-surface-variant": "#45474b",
+                "on-secondary-fixed": "#001f25",
+                "on-error": "#ffffff",
+                "primary": "#000000",
+                "tertiary-fixed": "#f0dfd4",
+                "secondary": "#316671",
+                "on-primary-container": "#80848a",
+                "paper": "#F7F5EF",
+                "rule": "#D3CEC2",
+                "on-secondary-fixed-variant": "#144e58",
+                "outline": "#75777b",
+                "primary-fixed-dim": "#c3c6cd",
+                "primary-fixed": "#e0e2ea",
+                "on-tertiary-container": "#8f8177",
+                "background": "#fcf8f8",
+                "surface-dim": "#dcd9d9",
+                "secondary-fixed": "#b6ebf8",
+                "tertiary-container": "#221a13",
+                "on-surface": "#1c1b1c",
+                "tertiary-fixed-dim": "#d3c4b8",
+                "success": "#3F6B4F",
+                "slate": "#66707A",
+                "info": "#486A7A",
+                "error": "#9E3B35",
+                "tertiary": "#000000",
+                "surface-variant": "#e5e2e2",
+                "surface-bright": "#fcf8f8",
+                "surface-container-high": "#ebe7e7",
+                "surface": "#fcf8f8",
+                "on-tertiary": "#ffffff",
+                "primary-container": "#181c21",
+                "error-container": "#ffdad6",
+                "on-primary-fixed": "#181c21",
+                "on-primary": "#ffffff",
+                "warn": "#A76522",
+                "secondary-container": "#b6ebf8",
+                "on-primary-fixed-variant": "#43474d",
+                "inverse-on-surface": "#f3f0f0",
+                "inverse-surface": "#313031",
+                "outline-variant": "#c5c6cb",
+                "on-tertiary-fixed-variant": "#4f453c",
+                "surface-container-highest": "#e5e2e2",
+                "accent-brass": "#B8872E",
+                "surface-tint": "#5b5f65",
+                "on-error-container": "#93000a"
+            },
+            "borderRadius": {
+                "DEFAULT": "0.125rem",
+                "lg": "0.25rem",
+                "xl": "0.5rem",
+                "full": "0.75rem"
+            },
+            "fontFamily": {
+                "title-sm": ["\"Source Serif 4\""],
+                "body-md": ["IBM Plex Sans"],
+                "data-mono": ["IBM Plex Mono"],
+                "headline-md": ["\"Source Serif 4\""],
+                "label-sm": ["IBM Plex Sans"],
+                "display-lg": ["\"Source Serif 4\""],
+                "body-md-bold": ["IBM Plex Sans"]
+            },
+            "fontSize": {
+                "title-sm": ["18px", {"lineHeight": "24px", "fontWeight": "600"}],
+                "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                "data-mono": ["13px", {"lineHeight": "16px", "fontWeight": "500"}],
+                "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                "display-lg": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
+                "body-md-bold": ["14px", {"lineHeight": "20px", "fontWeight": "600"}]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        body {
+            background-color: #F7F5EF; /* Paper */
+            color: #1c1b1c; /* on-surface */
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .citation-chip {
+            background-color: #B8872E; /* Brass */
+            color: white;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 10px;
+            padding: 1px 4px;
+            border-radius: 2px;
+            cursor: pointer;
+        }
+        /* Custom scrollbar for dense data panels */
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #D3CEC2; border-radius: 2px; }
+    </style>
+</head>
+<body class="font-body-md">
+<!-- Sidebar (SideNavBar) -->
+<aside class="fixed left-0 top-0 h-screen w-[240px] bg-primary flex flex-col border-r border-rule z-50">
+<div class="p-6 border-b border-on-primary-fixed-variant">
+<h1 class="text-title-sm font-title-sm text-on-primary uppercase tracking-wider">Capital Analyst</h1>
+<p class="text-label-sm font-label-sm text-on-primary-container">Venture Partners</p>
+</div>
+<nav class="flex-grow py-4">
+<a class="flex items-center gap-3 px-4 py-3 bg-secondary text-on-secondary border-l-[3px] border-secondary-fixed-dim scale-100 active:scale-95 transition-all" href="#">
+<span class="material-symbols-outlined">analytics</span>
+<span class="font-body-md">Pipeline</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-primary-container hover:bg-on-primary-fixed-variant transition-colors active:scale-95" href="#">
+<span class="material-symbols-outlined">business_center</span>
+<span class="font-body-md">Portfolio</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-primary-container hover:bg-on-primary-fixed-variant transition-colors active:scale-95" href="#">
+<span class="material-symbols-outlined">fact_check</span>
+<span class="font-body-md">Due Diligence</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-primary-container hover:bg-on-primary-fixed-variant transition-colors active:scale-95" href="#">
+<span class="material-symbols-outlined">insights</span>
+<span class="font-body-md">Market Intel</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-primary-container hover:bg-on-primary-fixed-variant transition-colors active:scale-95" href="#">
+<span class="material-symbols-outlined">description</span>
+<span class="font-body-md">Documents</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-primary-container hover:bg-on-primary-fixed-variant transition-colors active:scale-95" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-body-md">Settings</span>
+</a>
+</nav>
+<div class="mt-auto p-4 flex flex-col gap-2">
+<button class="w-full bg-on-primary text-primary py-2 font-body-md-bold border border-primary hover:bg-porcelain transition-colors">
+                New Deal
+            </button>
+<div class="mt-4 border-t border-on-primary-fixed-variant pt-4">
+<a class="flex items-center gap-3 px-4 py-2 text-on-primary-container hover:text-on-primary transition-colors" href="#">
+<span class="material-symbols-outlined">help_outline</span>
+<span class="font-label-sm">Support</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-primary-container hover:text-on-primary transition-colors" href="#">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-label-sm">Sign Out</span>
+</a>
+</div>
+</div>
+</aside>
+<!-- Top Navigation (TopNavBar) -->
+<header class="fixed top-0 left-[240px] w-[calc(100%-240px)] h-16 bg-paper border-b border-rule flex justify-between items-center px-6 z-40">
+<div class="flex items-center gap-8">
+<span class="text-title-sm font-title-sm font-bold text-on-surface">Alpha Private Equity</span>
+<nav class="flex gap-6">
+<a class="text-primary font-body-md-bold border-b-2 border-primary pb-1" href="#">Deal Room</a>
+<a class="text-on-surface-variant font-body-md hover:text-primary transition-colors" href="#">Team Feed</a>
+<a class="text-on-surface-variant font-body-md hover:text-primary transition-colors" href="#">Risk Metrics</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex gap-3 mr-4">
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:text-primary">notifications</span>
+</div>
+</div>
+</header>
+<!-- Main Content -->
+<main class="ml-[240px] pt-16 min-h-screen p-8">
+<!-- Dashboard Header -->
+<div class="flex justify-between items-end mb-8">
+<div>
+<h2 class="text-headline-md font-headline-md text-primary">Analyst Command Center</h2>
+<p class="text-body-md text-on-surface-variant">Active Deal Monitoring &amp; Underwriting Intelligence</p>
+</div>
+<div class="flex gap-4">
+<button class="px-4 py-2 border border-outline text-on-surface hover:bg-surface-container transition-colors text-body-md">Export PDF</button>
+<button class="px-4 py-2 bg-primary text-on-primary hover:bg-on-surface-variant transition-colors text-body-md font-body-md-bold">Update Pipeline</button>
+</div>
+</div>
+<!-- Top Metrics Row -->
+<div class="grid grid-cols-12 gap-6 mb-6">
+<!-- Pipeline Velocity -->
+<div class="col-span-12 lg:col-span-4 bg-white border border-rule p-5 flex flex-col justify-between">
+<div>
+<h3 class="text-label-sm text-on-surface-variant uppercase tracking-tighter mb-1">Pipeline Velocity</h3>
+<div class="flex items-baseline gap-3">
+<span class="text-display-lg font-display-lg">24.8<span class="text-title-sm font-title-sm ml-1">days</span></span>
+<span class="text-success text-body-md font-body-md-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-[18px]">trending_up</span>
+                            +12.4%
+                        </span>
+</div>
+</div>
+<div class="mt-4 h-16 w-full flex items-end gap-1">
+<!-- Fake Trend Chart -->
+<div class="flex-1 bg-surface-container h-[40%]"></div>
+<div class="flex-1 bg-surface-container h-[55%]"></div>
+<div class="flex-1 bg-surface-container h-[45%]"></div>
+<div class="flex-1 bg-surface-container h-[70%]"></div>
+<div class="flex-1 bg-secondary h-[85%]"></div>
+<div class="flex-1 bg-secondary-fixed-dim h-[100%]"></div>
+</div>
+</div>
+<!-- Diligence Gaps -->
+<div class="col-span-12 lg:col-span-4 bg-white border border-rule p-5">
+<h3 class="text-label-sm text-on-surface-variant uppercase tracking-tighter mb-4">Diligence Gaps</h3>
+<div class="space-y-4">
+<div>
+<div class="flex justify-between text-body-md mb-1">
+<span>Cap Table Audit</span>
+<span class="font-body-md-bold">65%</span>
+</div>
+<div class="w-full bg-surface-container h-1.5 rounded-full overflow-hidden">
+<div class="bg-secondary h-full" style="width: 65%"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between text-body-md mb-1">
+<span>Cybersecurity Review</span>
+<span class="font-body-md-bold text-success">98%</span>
+</div>
+<div class="w-full bg-surface-container h-1.5 rounded-full overflow-hidden">
+<div class="bg-success h-full" style="width: 98%"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Open Questions -->
+<div class="col-span-12 lg:col-span-4 bg-white border border-rule p-5">
+<h3 class="text-label-sm text-on-surface-variant uppercase tracking-tighter mb-4">Open Questions</h3>
+<ul class="space-y-3">
+<li class="flex items-start gap-2 text-body-md group cursor-pointer">
+<span class="material-symbols-outlined text-warn text-[20px]">priority_high</span>
+<span class="group-hover:underline underline-offset-4 decoration-rule">Clarify Series C liquidation preferences with legal.</span>
+</li>
+<li class="flex items-start gap-2 text-body-md group cursor-pointer text-on-surface-variant">
+<span class="material-symbols-outlined text-outline text-[20px]">radio_button_unchecked</span>
+<span class="group-hover:underline underline-offset-4 decoration-rule">Confirm Q3 churn rate against Stripe logs.</span>
+</li>
+</ul>
+</div>
+</div>
+<!-- Middle Row: Risks & Deals -->
+<div class="grid grid-cols-12 gap-6">
+<!-- High-Severity Risks -->
+<div class="col-span-12 lg:col-span-4 flex flex-col gap-6">
+<section class="bg-paper border border-rule p-5">
+<div class="flex items-center justify-between mb-4">
+<h3 class="text-title-sm font-title-sm text-error">High-Severity Risks</h3>
+<span class="text-label-sm bg-error/10 text-error px-2 py-0.5 font-bold">CRITICAL</span>
+</div>
+<div class="space-y-4">
+<div class="p-3 bg-white border-l-4 border-error">
+<div class="flex justify-between items-start mb-1">
+<h4 class="font-body-md-bold">Market Concentration Liability</h4>
+<span class="citation-chip" title="Source: Legal Report v2">Ref 04</span>
+</div>
+<p class="text-label-sm text-on-surface-variant">Top 3 customers account for 78% of ARR. No long-term contracts in place.</p>
+</div>
+<div class="p-3 bg-white border-l-4 border-error">
+<div class="flex justify-between items-start mb-1">
+<h4 class="font-body-md-bold">IP Ownership Ambiguity</h4>
+<span class="citation-chip" title="Source: Patent Audit">Ref 12</span>
+</div>
+<p class="text-label-sm text-on-surface-variant">Open-source component dependencies lack proper attribution/licensing.</p>
+</div>
+</div>
+</section>
+</div>
+<!-- Assigned Deal Pipeline Table -->
+<div class="col-span-12 lg:col-span-8 bg-white border border-rule overflow-hidden">
+<div class="p-5 border-b border-rule flex justify-between items-center bg-surface-container-low">
+<h3 class="text-title-sm font-title-sm">Assigned Deal Pipeline</h3>
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer">more_horiz</span>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead>
+<tr class="bg-surface-container text-label-sm text-on-surface-variant uppercase tracking-wider">
+<th class="px-6 py-3 font-medium">Asset Name</th>
+<th class="px-6 py-3 font-medium">Stage</th>
+<th class="px-6 py-3 font-medium">Risk Profile</th>
+<th class="px-6 py-3 font-medium">Underwriter</th>
+<th class="px-6 py-3 font-medium"></th>
+</tr>
+</thead>
+<tbody class="divide-y divide-rule">
+<tr class="hover:bg-paper transition-colors cursor-pointer">
+<td class="px-6 py-4">
+<div class="flex flex-col">
+<span class="font-body-md-bold">NeuronFlow AI</span>
+<span class="text-label-sm text-on-surface-variant">Series B • FinTech</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="text-label-sm bg-secondary-container text-on-secondary-container px-2 py-1 rounded">Deep Diligence</span>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-warn"></div>
+<span class="text-body-md">Elevated</span>
+</div>
+</td>
+<td class="px-6 py-4 text-body-md">M. Sterling</td>
+<td class="px-6 py-4 text-right">
+<span class="material-symbols-outlined text-outline">chevron_right</span>
+</td>
+</tr>
+<tr class="hover:bg-paper transition-colors cursor-pointer">
+<td class="px-6 py-4">
+<div class="flex flex-col">
+<span class="font-body-md-bold">Lithium Labs</span>
+<span class="text-label-sm text-on-surface-variant">Growth • Energy Storage</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="text-label-sm bg-porcelain text-on-surface-variant px-2 py-1 rounded">IC Review</span>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-success"></div>
+<span class="text-body-md">Controlled</span>
+</div>
+</td>
+<td class="px-6 py-4 text-body-md">D. Vance</td>
+<td class="px-6 py-4 text-right">
+<span class="material-symbols-outlined text-outline">chevron_right</span>
+</td>
+</tr>
+<tr class="hover:bg-paper transition-colors cursor-pointer">
+<td class="px-6 py-4">
+<div class="flex flex-col">
+<span class="font-body-md-bold">Aura Security</span>
+<span class="text-label-sm text-on-surface-variant">Series A • Cybersecurity</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="text-label-sm bg-tertiary-fixed text-on-tertiary-fixed-variant px-2 py-1 rounded">LOI Draft</span>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-error"></div>
+<span class="text-body-md">High</span>
+</div>
+</td>
+<td class="px-6 py-4 text-body-md">E. Thorne</td>
+<td class="px-6 py-4 text-right">
+<span class="material-symbols-outlined text-outline">chevron_right</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</main>
+</body></html>
