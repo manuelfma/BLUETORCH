@@ -72,15 +72,26 @@ Project documentation:
 - `AGENTS.md` — product context, audience, voice, and constraints
 - `PRD.md` — product requirements and workflow specification
 - `DESIGN.md` — visual and interaction design specification
+- `ARCHITECTURE.md` — system architecture, data model, AI pipeline, and deployment plan
 - `AI_BEHAVIOUR.md` — AI behavior specification and evidence plan
+- `SPECIALIST_AGENT.md` — source-linked diligence risk analyst agent
+- `SUBMISSION.md` — submission package index and evidence checklist
 
 ## 7. How to Run / Preview Link
 Current status: design/prototype stage.
 
 Preview artifacts:
 
-- Stitch preview link: `ADD_STITCH_PREVIEW_LINK_HERE`
-- Local exported screens: `evidence/stitch/` once copied into the repo
+- Stitch preview link: paste the live Stitch link in Blackboard when submitting.
+- Static landing page: `public/index.html`
+- Local exported Stitch screens: `evidence/stitch/`
+- Landing page zip: `outputs/blue-torch-landing-page-20260701.zip`
+
+To view the static landing page locally, open:
+
+```text
+public/index.html
+```
 
 If building in Lovable:
 
@@ -102,9 +113,13 @@ For Session 11/12 submission, include:
 - Domain: `bluetorch.me`
 - Stitch preview link
 - AI behavior spec: `AI_BEHAVIOUR.md`
+- Architecture spec: `ARCHITECTURE.md`
+- Specialist agent: `SPECIALIST_AGENT.md`
+- Submission index: `SUBMISSION.md`
 - Evidence screenshots:
   - `analysis_review/screen.png`
   - `risk_register_completed/screen.png`
+  - browser screenshot of `public/index.html`
 - Skills installed:
   - `stitch-design-taste`
   - `copywriting`
